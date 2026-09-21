@@ -174,13 +174,11 @@ async function loadSheet() {
   const response = await fetch(url);
   const text = await response.text();
 
-
   const table = parseGoogleResponse(text);
   const rows = table.rows || [];
 
   renderHeader(table);
 
-  // 1行目はヘッダーなので除外
   dataRows = rows.map(row => ({
     // 敵列
     Name: getCellValue(row, 1),
