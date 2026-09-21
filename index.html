@@ -18,7 +18,116 @@
 </head>
 
 <body>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
 
+    #status {
+      margin-bottom: 12px;
+      color: #333;
+      font-size: 14px;
+    }
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    th, td {
+      border: 1px solid #d0d0d0;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+  </style>
+
+  <div id="status">読み込み中...</div>
+  <table id="sheetTable"></table>
+
+  <script>
+    const SPREADSHEET_ID = "19tn2D3Dg7ICRBgRZXDi_Tksib__1RicnyQLp-2xWTUg";
+    const SHEET_NAME = "data";
+
+    // まずシート名で試す
+    let url =
+      `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq` +
+      `?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    fetch(url)
+      .then(async res => {
+        const text = await res.text();
+
+        // 失敗時は gid で再試行
+        if (!res.ok || text.includes("Sorry") || text.includes("Error")) {
+          // シート1の gid 0 を使う
+          // シート2なら 0, 1, 2... で変える
+          const gidUrl =
+            `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq` +
+            `?tqx=out:json&gid=0`;
+
+          return fetch(gidUrl).then(r => r.text());
+        }
+
+        return text;
+      })
+      .then(text => {
+        const match = text.match(/google\.visualization\.Query\.setResponse\((.*)\)\s*;?\s*$/s);
+
+        if (!match) {
+          throw new Error("Google Sheetsの応答が想定と違います。公開設定を確認してください。");
+        }
+
+        const parsed = JSON.parse(match[1]);
+        const table = parsed.table;
+        const rows = table.rows || [];
+        const cols = table.cols || [];
+
+        const tableEl = document.getElementById("sheetTable");
+        tableEl.innerHTML = "";
+
+        const thead = document.createElement("thead");
+        const headRow = document.createElement("tr");
+
+        cols.forEach(col => {
+          const th = document.createElement("th");
+          th.textContent = col.label || "";
+          headRow.appendChild(th);
+        });
+
+        thead.appendChild(headRow);
+        tableEl.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        rows.forEach(row => {
+          const tr = document.createElement("tr");
+
+          (row.c || []).forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell && cell.v !== undefined ? cell.v : "";
+            tr.appendChild(td);
+          });
+
+          tbody.appendChild(tr);
+        });
+
+        tableEl.appendChild(tbody);
+        document.getElementById("status").textContent = "読み込み完了";
+      })
+      .catch(error => {
+        console.error(error);
+        document.getElementById("status").textContent = "読み込みに失敗しました";
+        document.getElementById("sheetTable").innerHTML = "";
+      });
+  </script>
 </body>
+
 </html>
