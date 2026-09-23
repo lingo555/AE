@@ -8,7 +8,7 @@ const tbodyElement = tableElement.querySelector("tbody");
 const filterNameElement = document.getElementById("filterName");
 const filterAreaElement = document.getElementById("filterArea");
 const filterDropElement = document.getElementById("filterDrop");
-const filterTimeOptionsElement = document.getElementById("filterTimeOptions");
+const filterAccessOptionsElement = document.getElementById("filterAccessOptions");
 const filterTypeOptionsElement = document.getElementById("filterTypeOptions");
 const resetButton = document.getElementById("resetButton");
 
@@ -94,7 +94,7 @@ function renderTable() {
   const searchArea = filterAreaElement.value.trim().toLowerCase();
   const searchDrop = filterDropElement.value.trim().toLowerCase();
 
-  const selectedTime = getSelectedRadioValue("filterTime");
+  const selectedAccess = getSelectedRadioValue("filterAccess");
   const selectedType = getSelectedRadioValue("filterType");
 
   const filteredRows = dataRows.filter(row => {
@@ -107,14 +107,14 @@ function renderTable() {
     const matchesDrop =
       row.Drop.toLowerCase().includes(searchDrop);
 
-    const matchesTime =
-      selectedTime === "" || row.Time === selectedTime;
+    const matchesAccess =
+      selectedAccess === "" || row.Access === selectedAccess;
 
     const matchesType =
       selectedType === "" || row.Type === selectedType;
 
     // すべての条件をANDで判定
-    return matchesName && matchesArea && matchesDrop && matchesTime && matchesType;
+    return matchesName && matchesArea && matchesDrop && matchesAccess && matchesType;
   });
 
   tbodyElement.innerHTML = "";
@@ -122,8 +122,8 @@ function renderTable() {
   filteredRows.forEach(row => {
     const tr = document.createElement("tr");
 
-    // 表示順: Name、Area、Time、Type、Drop、Note
-    [row.Name, row.Area, row.Time, row.Type, row.Drop, row.Note].forEach(value => {
+    // 表示順: Name、Area、Access、Type、Drop、Note
+    [row.Name, row.Area, row.Access, row.Type, row.Drop, row.Note].forEach(value => {
       const td = document.createElement("td");
       td.textContent = value;
       tr.appendChild(td);
@@ -143,10 +143,10 @@ function renderHeader(table) {
   const headers = [
     columns[1]?.label,
     columns[2]?.label,
-    columns[5]?.label,
-    columns[6]?.label,
-    columns[7]?.label,
-    columns[11]?.label
+    columns[10]?.label,
+    columns[11]?.label,
+    columns[12]?.label,
+    columns[16]?.label
   ];
 
   theadElement.innerHTML = "";
@@ -174,6 +174,7 @@ async function loadSheet() {
   const response = await fetch(url);
   const text = await response.text();
 
+
   const table = parseGoogleResponse(text);
   const rows = table.rows || [];
 
@@ -187,32 +188,37 @@ async function loadSheet() {
     Area: mergeValues([
       getCellValue(row, 2),
       getCellValue(row, 3),
-      getCellValue(row, 4)
+      getCellValue(row, 4),
+      getCellValue(row, 5),
+      getCellValue(row, 6),
+      getCellValue(row, 7),
+      getCellValue(row, 8),
+      getCellValue(row, 9)
     ]),
 
-    // 時代列
-    Time: getCellValue(row, 5),
+    // アクセス列
+    Access: getCellValue(row, 10),
 
     // 敵分類列
-    Type: getCellValue(row, 6),
+    Type: getCellValue(row, 11),
 
     // ドロップ列
     Drop: mergeValues([
-      getCellValue(row, 7),
-      getCellValue(row, 8),
-      getCellValue(row, 9),
-      getCellValue(row, 10)
+      getCellValue(row, 12),
+      getCellValue(row, 13),
+      getCellValue(row, 14),
+      getCellValue(row, 15)
     ]),
 
     // 備考列
-    Note: getCellValue(row, 11)
+    Note: getCellValue(row, 16)
   }));
 
   // 時代列と敵分類列の値からラジオボタンを自動生成
   createRadioOptions(
-    filterTimeOptionsElement,
-    "filterTime",
-    dataRows.map(row => row.Time)
+    filterAccessOptionsElement,
+    "filterAccess",
+    dataRows.map(row => row.Access)
   );
 
   createRadioOptions(
@@ -236,7 +242,7 @@ filterDropElement.addEventListener("input", renderTable);
  */
 document.addEventListener("change", event => {
   if (
-    event.target.matches('input[name="filterTime"]') ||
+    event.target.matches('input[name="filterAccess"]') ||
     event.target.matches('input[name="filterType"]')
   ) {
     renderTable();
@@ -252,7 +258,7 @@ resetButton.addEventListener("click", () => {
   filterDropElement.value = "";
 
   document.querySelector(
-    'input[name="filterTime"][value=""]'
+    'input[name="filterAccess"][value=""]'
   ).checked = true;
 
   document.querySelector(
