@@ -1,67 +1,60 @@
 <!DOCTYPE html>
-
 <html lang="ja">
-
 <head>
-  <title>アナデン雑魚敵図鑑</title>
   <meta charset="utf-8">
-  <meta name="description" content="雑魚敵必ず倒す。">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
-  <meta property="og:title" content="アナデン雑魚敵図鑑">
-  <meta property="og:description" content="雑魚敵必ず倒す。">
-  <meta property="og:image" content="./tool-logo.png">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@atoenisfu">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Sheet 表</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.2/css/all.css">
 </head>
-
 <body>
-  <div id="filterForm">
-    <div>
+  <div class="main-area">
+    <main>
+  <form>
+    <div class="text-filter">
       <label>
-        敵
-        <input type="search" id="filterName" placeholder="検索">
+        <div class="label-name">モンスター名</div>
+        <input type="search" id="filterName">
       </label>
 
       <label>
-        出現エリア
-        <input type="search" id="filterArea" placeholder="検索">
+        <div class="label-name">出現エリア</div>
+        <input type="search" id="filterArea">
       </label>
 
       <label>
-        ドロップ
-        <input type="search" id="filterDrop" placeholder="検索">
+        <div class="label-name">ドロップ素材</div>
+        <input type="search" id="filterDrop">
       </label>
     </div>
 
     <div class="radio-filter">
-      <span>アクセス：</span>
-      <label>
-        <input type="radio" name="filterAccess" value="" checked>
-        すべて
-      </label>
-      <div id="filterAccessOptions"></div>
+      <div class="label-name">アクセス</div>
+      <div id="filterAccessOptions">
+      <input type="radio" id="filterAccess_all" name="filterAccess" value="" checked>
+      <label for="filterAccess_all">すべて</label>
+      </div>
     </div>
 
     <div class="radio-filter">
-      <span>敵分類：</span>
-      <label>
-        <input type="radio" name="filterType" value="" checked>
-        すべて
-      </label>
-      <div id="filterTypeOptions"></div>
+      <div class="label-name">敵分類</div>
+      <div id="filterTypeOptions">
+      <input type="radio" id="filterType_all" name="filterType" value="" checked>
+      <label for="filterType_all">すべて</label>
+      </div>
     </div>
 
     <button id="resetButton" type="button">リセット</button>
-  </div>
+  </form>
 
   <table id="sheetTable">
     <thead></thead>
     <tbody></tbody>
   </table>
-
+    </main>
+  </div>
+  <footer>
+    開発・連絡先：<i class="fa-brands fa-x-twitter"></i> <a href="https://twitter.com/atoenisfu">りんご @atoenisfu</a>
+  </footer>
 </body>
-
-</html>
