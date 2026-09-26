@@ -7,7 +7,7 @@ body {
   /background-color: #84cdd6;
   /position: relative;
 }
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   body {
     font-size: 12px;
   }
@@ -128,7 +128,12 @@ button {
 table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 80%;
+  font-size: 90%;
+}
+@media (max-width: 550px) {
+  table {
+    font-size: 80%;
+  }
 }
 
 th,
