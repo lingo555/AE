@@ -1,47 +1,134 @@
+/*================ 全体 ================*/
 body {
   font-family: sans-serif;
-  margin: 20px;
+  font-size: 14px;
+  /display: flex;
+  /justify-content: center;
+  /background-color: #84cdd6;
+  /position: relative;
+}
+@media (max-width: 500px) {
+  body {
+    font-size: 12px;
+  }
 }
 
-#filterArea {
+.main-area {
+  display: flex;
+  justify-content: center;
+  /background-color: #EDEDEB;
+  /position: relative;
+}
+
+main {
+  max-width: 1000px;
+  padding: 5px;
+}
+
+footer {
+  /margin: 3em 0 1em;
+  padding: 2em;
+  text-align: center;
+  font-size: 0.8em;
+  background-color: #eee;
+  color: #555;
+}
+
+
+/*================ フィルタ部分 ================*/
+form {
   margin-bottom: 16px;
 }
 
-#filterArea > div:first-child {
+.label-name {
+  display: block;
+  width: 7em;
+  margin: 5px 0px;
+  /background-color: #eee;
+}
+
+/*-------------- テキスト検索 --------------*/
+.text-filter {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
+.text-filter label {
+  /display: block;
+  width: 31%;
+}
+@media (max-width: 600px) {
+  .text-filter label {
+    width: 47%;
+  }
+}
 input[type="search"] {
-  margin-left: 4px;
+  /margin-left: 4px;
   padding: 5px;
+  width: 100%;
+  font-size: 80%;
 }
 
+/*-------------- ラジオボタン -------------*/
 .radio-filter {
-  display: flex;
-  gap: 8px;
+  /display: flex;
   align-items: center;
   flex-wrap: wrap;
   margin: 6px 0;
+  /background-color: #999;
 }
 
-#filterDOptions,
-#filterEOptions {
+.radio-filter > div {
+  /background-color: #EDEDEB;
+}
+
+#filterAccessOptions,
+#filterTypeOptions {
   display: flex;
-  gap: 8px;
+  gap: 5px;
   flex-wrap: wrap;
 }
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  display: inline-block;
+  padding: 2px 5px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  /margin: 2px 4px;
+  font-size: 90%;
+}
+
+input[type="radio"]:hover + label {
+  border-color: #111;
+}
+
+input[type="radio"]:checked + label {
+  border-color: #555;
+  background-color: #555;
+  color: #fff;
+}
+
+
 
 button {
   margin-top: 8px;
   padding: 5px 12px;
 }
 
+/*================ 表部分 ================*/
 table {
   border-collapse: collapse;
   width: 100%;
+  font-size: 80%;
 }
 
 th,
