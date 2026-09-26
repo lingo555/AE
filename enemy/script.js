@@ -1,5 +1,5 @@
-const SPREADSHEET_ID = "19tn2D3Dg7ICRBgRZXDi_Tksib__1RicnyQLp-2xWTUg"; // Google Sheet ID
-const SHEET_NAME = "data"; // シート名
+const SPREADSHEET_ID = "19tn2D3Dg7ICRBgRZXDi_Tksib__1RicnyQLp-2xWTUg";
+const SHEET_NAME = "data";
 
 const tableElement = document.getElementById("sheetTable");
 const theadElement = tableElement.querySelector("thead");
@@ -56,25 +56,37 @@ function parseGoogleResponse(text) {
 /**
  * ラジオボタンを作成する
  */
-function createRadioOptions(container, name, values) {
-  container.innerHTML = "";
+function createRadioOptions(container, name, values, order) {
+  /* container.innerHTML = ""; */
 
-  const uniqueValues = [...new Set(values)]
-    .filter(value => value !== "")
-    .sort();
+  let uniqueValues = [...new Set(values)]
+    .filter(value => value !== "");
+  
+  uniqueValues = uniqueValues.sort((a, b) => {
+    const indexA = order.indexOf(a);
+    const indexB = order.indexOf(b);
 
+    return indexA - indexB;
+  }); 
+  
+  let id = 0;
   uniqueValues.forEach(value => {
-    const label = document.createElement("label");
+    const inputId = `${name}_${id}`;
     const input = document.createElement("input");
+    const label = document.createElement("label");
 
     input.type = "radio";
+    input.id = inputId;
     input.name = name;
     input.value = value;
 
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(` ${value}`));
+    label.htmlFor = inputId;
+    label.textContent = value;
 
+    container.appendChild(input);
     container.appendChild(label);
+
+    id++;
   });
 }
 
@@ -214,17 +226,22 @@ async function loadSheet() {
     Note: getCellValue(row, 16)
   }));
 
-  // 時代列と敵分類列の値からラジオボタンを自動生成
+  // アクセス列と敵分類列の値からラジオボタンを自動生成
+  const AccessOrder = ["現代", "現代-異時層", "現代-東方", "現代-東方-異時層", "未来", "未来-ガイア", "未来-東方", "古代", "古代-東方", "古代-西方", "幻象界", "冥峡界", "機人世界", "猫人世界", "石華人世界", "蝕時領域", "アナダン"];
+  const TypeOrder = ["FEAR", "釣り", "釣りヌシ", "銛突き漁ヌシ", "ラルム", "異境BOSS"];
+  
   createRadioOptions(
     filterAccessOptionsElement,
     "filterAccess",
-    dataRows.map(row => row.Access)
+    dataRows.map(row => row.Access),
+    AccessOrder
   );
 
   createRadioOptions(
     filterTypeOptionsElement,
     "filterType",
-    dataRows.map(row => row.Type)
+    dataRows.map(row => row.Type),
+    TypeOrder
   );
 
   renderTable();
