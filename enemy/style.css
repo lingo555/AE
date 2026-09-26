@@ -134,13 +134,14 @@ table {
 th,
 td {
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 4px;
   text-align: left;
   vertical-align: top;
 }
 
 th {
   background: #f2f2f2;
+  white-space: nowrap;
 }
 
 td {
