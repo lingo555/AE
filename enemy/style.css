@@ -34,7 +34,6 @@ footer {
 /*================ フィルタ部分 ================*/
 form {
   margin-bottom: 16px;
-  border-radius: 6px;
 }
 
 .label-name {
@@ -52,7 +51,6 @@ form {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 10px;
 }
 
 .text-filter label {
@@ -76,7 +74,7 @@ input[type="input"] {
 .radio-filter {
   align-items: center;
   flex-wrap: wrap;
-  margin: 6px 0;
+  /margin: 6px 0;
 }
 
 #filterAccessOptions,
@@ -117,7 +115,7 @@ input[type="radio"]:checked + label {
   justify-content: flex-end;
 }
 #resetButton {
-  margin-top: 8px;
+  /margin-top: 8px;
   border: 1px solid #ccc;
   padding: 5px 15px;
   border-radius: 20px;
