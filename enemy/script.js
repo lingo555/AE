@@ -120,7 +120,7 @@ function renderTable() {
     // Name + Type
     const nameTypeTd = document.createElement("td");
     if (row.Type) {
-      nameTypeTd.innerHTML = `<span class="enemy-type ${row.TypeClass}">${row.Type}</span><br>${row.Name}`;
+      nameTypeTd.innerHTML = `<span class="table-span ${row.TypeClass}">${row.Type}</span><br>${row.Name}`;
     } else {
       nameTypeTd.textContent = row.Name;
     }
@@ -129,7 +129,7 @@ function renderTable() {
     
     // Area + Access
     const areaTd = document.createElement("td");
-    areaTd.innerHTML = `<span class="area-access ${row.AccessClass}">${row.Access}</span><br>${row.Area}`;
+    areaTd.innerHTML = `<span class="table-span ${row.AccessClass}">${row.Access}</span><br>${row.Area}`;
 
     tr.appendChild(areaTd);
 
