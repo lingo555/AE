@@ -1,10 +1,10 @@
 /*================ 全体 ================*/
 body {
-  font-family: sans-serif;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   font-size: 14px;
   /display: flex;
   /justify-content: center;
-  /background-color: #84cdd6;
+  background-color: #FAF8FD;
   /position: relative;
 }
 @media (max-width: 550px) {
@@ -21,16 +21,18 @@ body {
 }
 
 main {
+  margin-top: 10px;
   max-width: 1000px;
+  /background-color: #FAF8FD;
   padding: 5px;
 }
 
 footer {
   /margin: 3em 0 1em;
-  padding: 2em;
+  padding: 20px;
   text-align: center;
   font-size: 0.8em;
-  background-color: #eee;
+  background-color: #E6DCE4;
   color: #555;
 }
 
@@ -38,37 +40,48 @@ footer {
 /*================ フィルタ部分 ================*/
 form {
   margin-bottom: 16px;
+  /background-color: #E6DCE4;
+  border-radius: 6px;
+  /padding: 10px;
 }
 
 .label-name {
   display: block;
-  width: 7em;
-  margin: 5px 0px;
-  /background-color: #eee;
+  margin: 15px 0px 10px;
+  background-color: #E6DCE4;
+  border-radius: 4px;
+  color: #6b5966;
+  font-weight: bold;
+  padding: 0px 10px;
+  /font-size: 90%;
 }
 
 /*-------------- テキスト検索 --------------*/
 .text-filter {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
 .text-filter label {
-  /display: block;
-  width: 31%;
+  /box-sizing: border-box;
+  width: calc((100% - 20px) / 3);
+  /padding: 0px 5px;
 }
 @media (max-width: 600px) {
   .text-filter label {
-    width: 47%;
+    width: 50%;
   }
 }
 input[type="input"] {
   /margin-left: 4px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #6b5966;
   padding: 2px;
   width: 100%;
-  /font-size: 90%;
+  font-size: 90%;
 }
 
 /*-------------- ラジオボタン -------------*/
@@ -97,33 +110,50 @@ input[type="radio"] {
 
 input[type="radio"] + label {
   display: inline-block;
-  padding: 2px 5px;
-  border: 2px solid #aaa;
-  border-radius: 4px;
+  padding: 2px 8px;
+  /border: 2px outset #F0FFF5;
+  border: 2px double #ccc;
+  border-radius: 20px;
   cursor: pointer;
-  background-color: #fff;
+  /background-color: #fff;
+  /background-image: linear-gradient(180deg, rgba(208, 216, 225, 1) 5%, rgba(246, 246, 246, 1) 20% 80%, rgba(220, 214, 222, 1) 95%);
   color: #333;
+  box-shadow: inset 0px 0px 8px 0px #E6DCE4;
   /margin: 2px 4px;
   font-size: 90%;
 }
 
 input[type="radio"]:hover + label {
-  border-color: #111;
+  border: 2px double #6b5966;
+  /opacity: 0.7;
 }
 
 input[type="radio"]:checked + label {
-  border-color: #555;
-  background-color: #555;
-  color: #fff;
+  border: 2px double #FAF8FD;
+  box-shadow: none;
+  background-color: #D6CCD4;
+  /color: #fff;
 }
 
-
-
-button {
+.reset-area {
+  display: flex;
+  justify-content: flex-end;
+}
+#resetButton {
   margin-top: 8px;
-  padding: 5px 12px;
+  border: 1px solid #ccc;
+  padding: 5px 15px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
+  font-size: 90%;
+  cursor: pointer;
+  background-color: #f7f7f7;
+  color: #333;
 }
-
+#resetButton:hover {
+  /opacity: 0.5;
+  border: 1px solid #6b5966;
+}
 /*================ 表部分 ================*/
 table {
   border-collapse: collapse;
@@ -140,41 +170,61 @@ th,
 td {
   border: 1px solid #ccc;
   padding: 4px;
-  text-align: left;
   vertical-align: middle;
-  min-width: 80px;
+  min-width: 70px;
 }
 
 th {
-  background: #f2f2f2;
+  background-color: #E6DCE4;
+  color: #6b5966;
 }
 
 td {
   white-space: pre-line;
 }
 
-.enemy-type {
+tr:nth-child(even) td {
+  background: #eee;
+}
+
+.table-span {
   display: inline-block;
   padding: 2px 5px;
-  border: 1px solid #aaa;
   border-radius: 5px;
-  background-color: #fff;
-  color: #333;
   margin-bottom: 2px;
+  /border: 0px;
   font-size: 90%;
 }
 
-.area-access {
-  display: inline-block;
-  padding: 2px 5px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  background-color: #fff;
-  color: #333;
-  margin-bottom: 2px;
-  font-size: 90%;
+.shiny {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
 }
-
+.fish {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
+}
+.fear {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
+}
+.past {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
+}
+.future {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
+}
+.present {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
+}
 .rift {
+  background-color: #fff;
   color: red;
+}
+.hollow {
+  background-color: #E4AEAE;
+  color: #CE6A6A;
 }
