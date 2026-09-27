@@ -3,69 +3,65 @@
   <head>
     <title>アナデン雑魚敵図鑑</title>
     <meta charset="utf-8">
-    <meta name="description" content="雑魚敵必ず倒す。">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1"
-    >
+    <meta name="description" content="雑魚狩りお手伝いします。">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
     <meta property="og:title" content="アナデン雑魚敵図鑑">
-    <meta property="og:description" content="雑魚敵必ず倒す。">
-    <meta property="og:image" content="./tool-logo.png">
+    <meta property="og:description" content="雑魚狩りお手伝いします。">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@atoenisfu">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.2/css/all.css">
     <script defer src="script.js"></script>
   </head>
-<body>
-  <div class="main-area">
-    <main>
-  <form>
-    <div class="text-filter">
-      <label>
-        <div class="label-name">モンスター名</div>
-        <input type="input" id="filterName" placeholder="検索">
-      </label>
-
-      <label>
-        <div class="label-name">出現エリア</div>
-        <input type="input" id="filterArea" placeholder="検索">
-      </label>
-
-      <label>
-        <div class="label-name">ドロップ素材</div>
-        <input type="input" id="filterDrop" placeholder="検索">
-      </label>
+  <body>
+    <div class="main-area">
+      <main>
+        <form>
+          <div class="text-filter">
+            <label>
+              <div class="label-name">モンスター名</div>
+              <input type="input" id="filterName" placeholder="検索">
+            </label>
+      
+            <label>
+              <div class="label-name">出現エリア</div>
+              <input type="input" id="filterArea" placeholder="検索">
+            </label>
+      
+            <label>
+              <div class="label-name">ドロップ素材</div>
+              <input type="input" id="filterDrop" placeholder="検索">
+            </label>
+          </div>
+      
+          <div class="radio-filter">
+            <div class="label-name">アクセス方法</div>
+            <div id="filterAccessOptions">
+            <input type="radio" id="filterAccess_all" name="filterAccess" value="" checked>
+            <label for="filterAccess_all">すべて</label>
+            </div>
+          </div>
+      
+          <div class="radio-filter">
+            <div class="label-name">モンスター分類</div>
+            <div id="filterTypeOptions">
+            <input type="radio" id="filterType_all" name="filterType" value="" checked>
+            <label for="filterType_all">すべて</label>
+            </div>
+          </div>
+      
+          <div class="reset-area">
+            <button id="resetButton" type="button">リセット</button>
+          </div>
+        </form>
+      
+        <table id="sheetTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </main>
     </div>
-
-    <div class="radio-filter">
-      <div class="label-name">アクセス方法</div>
-      <div id="filterAccessOptions">
-      <input type="radio" id="filterAccess_all" name="filterAccess" value="" checked>
-      <label for="filterAccess_all">すべて</label>
-      </div>
-    </div>
-
-    <div class="radio-filter">
-      <div class="label-name">モンスター分類</div>
-      <div id="filterTypeOptions">
-      <input type="radio" id="filterType_all" name="filterType" value="" checked>
-      <label for="filterType_all">すべて</label>
-      </div>
-    </div>
-
-    <div class="reset-area">
-      <button id="resetButton" type="button">リセット</button>
-    </div>
-  </form>
-
-  <table id="sheetTable">
-    <thead></thead>
-    <tbody></tbody>
-  </table>
-    </main>
-  </div>
-  <footer>
-    開発・連絡先：<i class="fa-brands fa-x-twitter"></i> <a href="https://x.com/atoenisfu">りんご @atoenisfu</a>
-  </footer>
-</body>
+    <footer>
+      開発・連絡先：<i class="fa-brands fa-x-twitter"></i> <a href="https://x.com/atoenisfu">りんご @atoenisfu</a>
+    </footer>
+  </body>
