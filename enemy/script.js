@@ -120,7 +120,7 @@ function renderTable() {
     // Name + Type
     const nameTypeTd = document.createElement("td");
     if (row.Type) {
-      nameTypeTd.innerHTML = `<span class="enemy-type">${row.Type}</span><br>${row.Name}`;
+      nameTypeTd.innerHTML = `<span class="enemy-type ${row.TypeClass}">${row.Type}</span><br>${row.Name}`;
     } else {
       nameTypeTd.textContent = row.Name;
     }
@@ -129,7 +129,7 @@ function renderTable() {
     
     // Area + Access
     const areaTd = document.createElement("td");
-    areaTd.innerHTML = `<span class="area-access">${row.Access}</span><br>${row.Area}`;
+    areaTd.innerHTML = `<span class="area-access ${row.AccessClass}">${row.Access}</span><br>${row.Area}`;
 
     tr.appendChild(areaTd);
 
@@ -152,10 +152,10 @@ function renderHeader(table) {
   const columns = table.cols;
 
   const headers = [
-    columns[1]?.label,
     columns[2]?.label,
-    columns[12]?.label,
-    columns[16]?.label
+    columns[3]?.label,
+    columns[13]?.label,
+    columns[17]?.label
   ];
 
   theadElement.innerHTML = "";
@@ -188,36 +188,40 @@ async function loadSheet() {
 
   dataRows = rows.map(row => ({
     // 敵列
-    Name: getCellValue(row, 1),
+    Name: getCellValue(row, 2),
 
     // 出現エリア列
     Area: mergeValues([
-      getCellValue(row, 2),
       getCellValue(row, 3),
       getCellValue(row, 4),
       getCellValue(row, 5),
       getCellValue(row, 6),
       getCellValue(row, 7),
       getCellValue(row, 8),
-      getCellValue(row, 9)
+      getCellValue(row, 9),
+      getCellValue(row, 10)
     ]),
 
     // アクセス列
-    Access: getCellValue(row, 10),
+    Access: getCellValue(row, 11),
 
     // 敵分類列
-    Type: getCellValue(row, 11),
+    Type: getCellValue(row, 12),
 
     // ドロップ列
     Drop: mergeValues([
-      getCellValue(row, 12),
       getCellValue(row, 13),
       getCellValue(row, 14),
-      getCellValue(row, 15)
+      getCellValue(row, 15),
+      getCellValue(row, 16)
     ]),
 
     // 備考列
-    Note: getCellValue(row, 16)
+    Note: getCellValue(row, 17),
+
+    // class列
+    TypeClass: getCellValue(row, 18),
+    AccessClass: getCellValue(row, 19)
   }));
 
   const AccessOrder = ["現代-中央", "現代-中央-異時層", "現代-東方", "現代-東方-異時層", "未来-中央", "未来-東方", "未来-ガイア", "古代-中央", "古代-東方", "古代-西方", "幻象界", "冥峡界", "機人世界", "猫人世界", "石華人世界", "蝕時領域", "アナダン"];
