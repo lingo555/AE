@@ -14,9 +14,7 @@ const resetButton = document.getElementById("resetButton");
 
 let dataRows = [];
 
-/**
- * Google Sheetsのセルから表示用の値を取得する
- */
+/*=========== Google Sheetsのセルから表示用の値を取得する ===========*/
 function getCellValue(row, index) {
   const cell = row.c?.[index];
 
@@ -24,15 +22,12 @@ function getCellValue(row, index) {
     return "";
   }
 
-  // セル値取得
   const value = cell.f ?? cell.v ?? "";
 
   return String(value);
 }
 
-/**
- * 空の値を除外して改行で結合する
- */
+/*=========== 空の値を除外して改行で結合する ======================*/
 function mergeValues(values) {
   return values
     .map(value => value.trim())
@@ -40,25 +35,18 @@ function mergeValues(values) {
     .join("\n");
 }
 
-/**
- * Google SheetsのJSONP形式のレスポンスを解析する
- */
+/*=========== Google SheetsのJSONP形式のレスポンスを解析する ===========*/
 function parseGoogleResponse(text) {
   const match = text.match(
     /google\.visualization\.Query\.setResponse\((.*)\)\s*;?\s*$/s
   );
 
   const result = JSON.parse(match[1]);
-
   return result.table;
 }
 
-/**
- * ラジオボタンを作成する
- */
+/*=========== ラジオボタンを作成する ======================*/
 function createRadioOptions(container, name, values, order) {
-  /* container.innerHTML = ""; */
-
   let uniqueValues = [...new Set(values)]
     .filter(value => value !== "");
   
@@ -90,17 +78,13 @@ function createRadioOptions(container, name, values, order) {
   });
 }
 
-/**
- * 選択されているラジオボタンの値を取得する
- */
+/*=========== 選択されているラジオボタンの値を取得する ===========*/
 function getSelectedRadioValue(name) {
   const selected = document.querySelector(`input[name="${name}"]:checked`);
   return selected ? selected.value : "";
 }
 
-/**
- * 表を描画する
- */
+/*=========== 表を描画する =================================*/
 function renderTable() {
   const searchName = filterNameElement.value.trim().toLowerCase();
   const searchArea = filterAreaElement.value.trim().toLowerCase();
@@ -125,7 +109,6 @@ function renderTable() {
     const matchesType =
       selectedType === "" || row.Type === selectedType;
 
-    // すべての条件をANDで判定
     return matchesName && matchesArea && matchesDrop && matchesAccess && matchesType;
   });
 
@@ -133,30 +116,44 @@ function renderTable() {
 
   filteredRows.forEach(row => {
     const tr = document.createElement("tr");
+    
+    // Name + Type
+    const nameTypeTd = document.createElement("td");
+    if (row.Type) {
+      nameTypeTd.innerHTML = `<span class="enemy-type">${row.Type}</span><br>${row.Name}`;
+    } else {
+      nameTypeTd.textContent = row.Name;
+    }
 
-    // 表示順: Name、Area、Access、Type、Drop、Note
-    [row.Name, row.Area, row.Access, row.Type, row.Drop, row.Note].forEach(value => {
-      const td = document.createElement("td");
-      td.textContent = value;
-      tr.appendChild(td);
-    });
+    tr.appendChild(nameTypeTd);
+    
+    // Area + Access
+    const areaTd = document.createElement("td");
+    areaTd.innerHTML = `<span class="area-access">${row.Access}</span><br>${row.Area}`;
+
+    tr.appendChild(areaTd);
+
+    // Drop
+    const dropTd = document.createElement("td");
+    dropTd.textContent = row.Drop;
+    tr.appendChild(dropTd);
+
+    // Note
+    const noteTd = document.createElement("td");
+    noteTd.textContent = row.Note;
+    tr.appendChild(noteTd);
 
     tbodyElement.appendChild(tr);
   });
-
 }
 
-/**
- * 初期表示時のヘッダーを作成する
- */
+/*=========== 初期表示時のヘッダーを作成する ======================*/
 function renderHeader(table) {
   const columns = table.cols;
 
   const headers = [
     columns[1]?.label,
     columns[2]?.label,
-    columns[10]?.label,
-    columns[11]?.label,
     columns[12]?.label,
     columns[16]?.label
   ];
@@ -174,9 +171,7 @@ function renderHeader(table) {
   theadElement.appendChild(tr);
 }
 
-/**
- * Google Sheetsを読み込む
- */
+/*=========== Google Sheetsを読み込む ======================*/
 async function loadSheet() {
   const url =
     `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq` +
@@ -185,7 +180,6 @@ async function loadSheet() {
 
   const response = await fetch(url);
   const text = await response.text();
-
 
   const table = parseGoogleResponse(text);
   const rows = table.rows || [];
@@ -226,8 +220,7 @@ async function loadSheet() {
     Note: getCellValue(row, 16)
   }));
 
-  // アクセス列と敵分類列の値からラジオボタンを自動生成
-  const AccessOrder = ["現代", "現代-異時層", "現代-東方", "現代-東方-異時層", "未来", "未来-ガイア", "未来-東方", "古代", "古代-東方", "古代-西方", "幻象界", "冥峡界", "機人世界", "猫人世界", "石華人世界", "蝕時領域", "アナダン"];
+  const AccessOrder = ["現代-中央", "現代-中央-異時層", "現代-東方", "現代-東方-異時層", "未来-中央", "未来-東方", "未来-ガイア", "古代-中央", "古代-東方", "古代-西方", "幻象界", "冥峡界", "機人世界", "猫人世界", "石華人世界", "蝕時領域", "アナダン"];
   const TypeOrder = ["FEAR", "釣り", "釣りヌシ", "銛突き漁ヌシ", "ラルム", "異境BOSS"];
   
   createRadioOptions(
@@ -247,16 +240,12 @@ async function loadSheet() {
   renderTable();
 }
 
-/**
- * テキスト検索の変更時
- */
+/*=========== テキスト検索の変更時 ======================*/
 filterNameElement.addEventListener("input", renderTable);
 filterAreaElement.addEventListener("input", renderTable);
 filterDropElement.addEventListener("input", renderTable);
 
-/**
- * ラジオボタンの変更時
- */
+/*=========== ラジオボタンの変更時 ======================*/
 document.addEventListener("change", event => {
   if (
     event.target.matches('input[name="filterAccess"]') ||
@@ -266,9 +255,7 @@ document.addEventListener("change", event => {
   }
 });
 
-/**
- * フィルタをリセットする
- */
+/*=========== フィルタをリセットする ======================*/
 resetButton.addEventListener("click", () => {
   filterNameElement.value = "";
   filterAreaElement.value = "";
