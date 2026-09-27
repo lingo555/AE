@@ -71,7 +71,7 @@ form {
 }
 @media (max-width: 600px) {
   .text-filter label {
-    width: 50%;
+  width: calc((100% - 10px) / 2);
   }
 }
 input[type="input"] {
