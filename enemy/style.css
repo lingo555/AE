@@ -177,18 +177,22 @@ tr:nth-child(even) td {
 .shiny {
   background-color: #eee6b1;
   color: #8f871e;
+  border: 1px solid #8f871e;
 }
 .fish {
   background-color: #b9ddf5;
   color: #18799c;
+  border: 1px solid #18799c;
 }
 .fear {
   background-color: #f5d8d8;
   color: #c04040;
+  border: 1px solid #c04040;
 }
 .boss {
   background-color: #eed8f5;
   color: #9436b1;
+  border: 1px solid #9436b1;
 }
 .past {
   background-color: #dd9047;
