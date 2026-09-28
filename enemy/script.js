@@ -225,7 +225,7 @@ async function loadSheet() {
   }));
 
   const AccessOrder = ["現代-中央", "現代-中央-異時層", "現代-東方", "現代-東方-異時層", "未来-中央", "未来-東方", "未来-ガイア", "古代-中央", "古代-東方", "古代-西方", "幻象界", "冥峡界", "機人世界", "猫人世界", "石華人世界", "蝕時領域", "蝕時領域-座礁領域", "アナダン"];
-  const TypeOrder = ["FEAR", "釣り", "釣りヌシ", "銛突き漁ヌシ", "ラルム", "異境BOSS"];
+  const TypeOrder = ["FEAR", "隠しFEAR", "釣り", "釣りヌシ", "銛突き漁ヌシ", "ラルム", "異境BOSS"];
   
   createRadioOptions(
     filterAccessOptionsElement,
