@@ -25,11 +25,13 @@ footer {
   margin-top: 20px;
   padding: 20px;
   text-align: center;
-  font-size: 100%;
+  font-size: 0.9em;
   background-color: #E6DCE4;
   color: #555;
 }
-
+a {
+  color: #6b5966;
+}
 
 /*================ フィルタ部分 ================*/
 form {
@@ -39,7 +41,8 @@ form {
 
 .label-name {
   display: block;
-  margin: 13px 0px 10px;
+  margin: 1em 0 0.85em;
+  font-size: 1em;
   background-color: #E6DCE4;
   border-radius: 4px;
   color: #6b5966;
@@ -68,19 +71,14 @@ input[type="input"] {
   border: 1px solid #6b5966;
   padding: 2px;
   width: 100%;
-  font-size: 90%;
+  font-size: 0.9em;
 }
 
 /*-------------- ラジオボタン -------------*/
-.radio-filter {
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 #filterAccessOptions,
 #filterTypeOptions {
   display: flex;
-  gap: 5px;
+  gap: 0.4em;
   flex-wrap: wrap;
 }
 
@@ -97,7 +95,7 @@ input[type="radio"] + label {
   background-color: #fff;
   color: #333;
   box-shadow: inset 0px 0px 8px 0px #E6DCE4;
-  font-size: 90%;
+  font-size: 0.9em;
 }
 
 input[type="radio"]:hover + label {
@@ -119,8 +117,8 @@ input[type="radio"]:checked + label {
   border: 1px solid #ccc;
   padding: 5px 15px;
   border-radius: 20px;
-  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
-  font-size: 90%;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+  font-size: 0.9em;
   cursor: pointer;
   background-color: #f7f7f7;
   color: #333;
@@ -141,6 +139,7 @@ td {
   padding: 4px;
   vertical-align: middle;
   min-width: 70px;
+  font-size: 0.9em;
 }
 
 th {
@@ -151,11 +150,10 @@ th {
 
 td {
   white-space: pre-line;
-  font-size: 90%;
 }
 @media (max-width: 550px) {
   td {
-    font-size: 80%;
+    font-size: 0.8em;
   }
 }
 tr:nth-child(even) td {
@@ -169,29 +167,29 @@ tr:nth-child(even) td {
   padding: 0px 5px;
   border-radius: 4px;
   margin-bottom: 2px;
-  font-size: 90%;
+  font-size: 0.9em;
   color: #fff;
 }
 
 .shiny {
   background-color: #eee6b1;
   color: #8f871e;
-  border: 1px solid #8f871e;
+  border: 0.1em solid #8f871e;
 }
 .fish {
   background-color: #b9ddf5;
   color: #18799c;
-  border: 1px solid #18799c;
+  border: 0.1em solid #18799c;
 }
 .fear {
   background-color: #f5d8d8;
   color: #c04040;
-  border: 1px solid #c04040;
+  border: 0.1em solid #c04040;
 }
 .boss {
   background-color: #eed8f5;
   color: #9436b1;
-  border: 1px solid #9436b1;
+  border: 0.1em solid #9436b1;
 }
 .past {
   background-color: #dd9047;
