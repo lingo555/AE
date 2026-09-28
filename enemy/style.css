@@ -54,6 +54,7 @@ form {
 .text-filter {
   display: flex;
   column-gap: 10px;
+  flex-wrap: wrap;
 }
 
 .text-filter label {
