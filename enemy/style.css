@@ -39,7 +39,7 @@ form {
 
 .label-name {
   display: block;
-  margin: 15px 0px 10px;
+  margin: 13px 0px 10px;
   background-color: #E6DCE4;
   border-radius: 4px;
   color: #6b5966;
@@ -52,7 +52,6 @@ form {
   display: flex;
   column-gap: 10px;
   flex-wrap: wrap;
-  /margin-bottom: 10px;
 }
 
 .text-filter label {
@@ -76,7 +75,6 @@ input[type="input"] {
 .radio-filter {
   align-items: center;
   flex-wrap: wrap;
-  /margin: 6px 0;
 }
 
 #filterAccessOptions,
@@ -117,7 +115,7 @@ input[type="radio"]:checked + label {
   justify-content: flex-end;
 }
 #resetButton {
-  margin-top: 10px;
+  margin-top: 8px;
   border: 1px solid #ccc;
   padding: 5px 15px;
   border-radius: 20px;
@@ -143,13 +141,8 @@ td {
   padding: 4px;
   vertical-align: middle;
   min-width: 70px;
-  font-size: 90%;
 }
-@media (max-width: 550px) {
-  th, td {
-    font-size: 80%;
-  }
-}
+
 th {
   background-color: #6b5966;
   color: #fff;
@@ -157,8 +150,13 @@ th {
 
 td {
   white-space: pre-line;
+  font-size: 90%;
 }
-
+@media (max-width: 550px) {
+  td {
+    font-size: 80%;
+  }
+}
 tr:nth-child(even) td {
   background: #E6DCE4;
 }
