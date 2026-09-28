@@ -146,6 +146,7 @@ td {
 th {
   background-color: #6b5966;
   color: #fff;
+  white-space: nowrap;
 }
 
 td {
