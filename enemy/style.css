@@ -4,11 +4,11 @@ body {
   font-size: 14px;
   background-color: #FAF8FD;
 }
-/*@media (max-width: 550px) {
+@media (max-width: 550px) {
   body {
     font-size: 12px;
   }
-}*/
+}
 
 .main-area {
   display: flex;
